@@ -20,8 +20,6 @@ namespace ORM_Dapper
 
             IDbConnection conn = new MySqlConnection(connString);
             
-
-            #region Department Section
             var departmentRepo = new DapperDepartmentRepository(conn);
             
             departmentRepo.InsertDepartment("Bry's New Department");
@@ -35,9 +33,20 @@ namespace ORM_Dapper
                 Console.WriteLine();
                 Console.WriteLine();
             }
-            #endregion
             
             var productRepository = new DapperProductRepository(conn);
+
+            var productToUpdate = productRepository.GetProduct(974);
+            
+
+            productRepository.UpdateProduct(productToUpdate);
+
+            productToUpdate.Name = "UPDATED!!!";
+            productToUpdate.Price = 12.99;
+            productToUpdate.CategoryID = 1;
+            productToUpdate.OnSale = false;
+            productToUpdate.StockLevel = 1000;
+            
             var products = productRepository.GetAllProducts();
             foreach (var product in products)
             {
