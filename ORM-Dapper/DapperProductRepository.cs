@@ -20,7 +20,7 @@ public class DapperProductRepository : IProductRepository
     
     public IEnumerable<Product> GetAllProducts()
     {
-        return _conn.Query<Product>("SELECT * FROM product;");
+        return _conn.Query<Product>("SELECT * FROM products;");
     }
 
     public Product GetProduct(int id)
