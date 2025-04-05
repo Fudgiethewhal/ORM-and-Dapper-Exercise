@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using ORM_Dapper;
+using System.Data;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using ORM_Dapper;
@@ -22,9 +23,9 @@ namespace ORM_Dapper
             IDbConnection conn = new MySqlConnection(connString);
             
             var departmentRepo = new DapperDepartmentRepository(conn);
-            
-            departmentRepo.InsertDepartment("Bry's New Department");
 
+            departmentRepo.InsertDepartment("Bry's New Department");
+            
             var departments = departmentRepo.GetAllDepartments();
 
             foreach (var department in departments)

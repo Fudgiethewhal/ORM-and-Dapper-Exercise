@@ -22,11 +22,6 @@ public class DapperProductRepository : IDepartmentRepository
         return _conn.Query<Department>("SELECT * FROM departments");
     }
     
-    public IEnumerable<Product> GetAllProducts()
-    {
-        return _conn.Query<Product>("SELECT * FROM products;");
-    }
-
     public Product GetProduct(int id)
     {
         return _conn.QuerySingle<Product>("SELECT * FROM products WHERE productID = @id;",
