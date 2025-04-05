@@ -9,15 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.28" />
-    <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="MySql.Data" Version="9.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0-preview.2.25163.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json">
+    <None Update="Appsettings.json.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

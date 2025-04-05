@@ -9,13 +9,17 @@ using System.Data;
 
 namespace ORM_Dapper;
 
-public class DapperProductRepository : IProductRepository
+public class DapperProductRepository : IDepartmentRepository
 {
     private readonly IDbConnection _conn;
-
-    public DapperProductRepository(IDbConnection conn)
+    public DapperDepartmentRepository(IDbConnection conn)
     {
         _conn = conn;   
+    }
+
+    public IEnumerable<Department> GetAllDepartments()
+    {
+        return _conn.Query<Department>("SELECT * FROM departments");
     }
     
     public IEnumerable<Product> GetAllProducts()
@@ -25,7 +29,7 @@ public class DapperProductRepository : IProductRepository
 
     public Product GetProduct(int id)
     {
-        return _conn.QuerySingle<Product>("SELECT * FROM product WHERE productID = @id;",
+        return _conn.QuerySingle<Product>("SELECT * FROM products WHERE productID = @id;",
             new { id });
         }
 
@@ -47,4 +51,5 @@ public class DapperProductRepository : IProductRepository
                 stock = product.StockLevel
             });
     }
+
 }

@@ -5,6 +5,7 @@ using ORM_Dapper;
 using System.Text;
 
 
+
 namespace ORM_Dapper
 {
     public class Program
@@ -36,12 +37,12 @@ namespace ORM_Dapper
             
             var productRepository = new DapperProductRepository(conn);
 
-            var productToUpdate = productRepository.GetProduct(974);
+            var productToUpdate = productRepository.GetProduct(940);
             
 
             productRepository.UpdateProduct(productToUpdate);
 
-            productToUpdate.Name = "UPDATED!!!";
+            productToUpdate.Name = "Updated!!!";
             productToUpdate.Price = 12.99;
             productToUpdate.CategoryID = 1;
             productToUpdate.OnSale = false;
