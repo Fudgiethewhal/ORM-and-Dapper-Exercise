@@ -22,20 +22,16 @@ namespace ORM_Dapper
 
             IDbConnection conn = new MySqlConnection(connString);
             
-            var departmentRepo = new DapperDepartmentRepository(conn);
+            var repo = new DapperProductRepository(conn);
 
-            departmentRepo.InsertDepartment("Bry's New Department");
-            
-            var departments = departmentRepo.GetAllDepartments();
+            var products = repo.GetAllProducts();
 
-            foreach (var department in departments)
+            foreach (var prod in products)
             {
-                Console.WriteLine(department.DepartmentID);
-                Console.WriteLine(department.Name);
-                Console.WriteLine();
-                Console.WriteLine();
+                Console.WriteLine($"{prod.CategoryID} {prod.Name}");
             }
             
+            repo.CreateProduct("newStuff", 20, 1);
             var productRepository = new DapperProductRepository(conn);
 
             var productToUpdate = productRepository.GetProduct(940);

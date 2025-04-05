@@ -9,26 +9,30 @@ using System.Data;
 
 namespace ORM_Dapper;
 
-public class DapperProductRepository : IDepartmentRepository
+public class DapperProductRepository : IProductRepository
 {
     private readonly IDbConnection _conn;
-    public DapperDepartmentRepository(IDbConnection conn)
+    public DapperProductRepository(IDbConnection conn)
     {
         _conn = conn;   
     }
 
-    public IEnumerable<Department> GetAllDepartments()
+    public void CreateProduct(string name, double price, int categoryID)
     {
-        return _conn.Query<Department>("SELECT * FROM departments");
+        _conn.Execute("INSERT INTO products (Name, Price, CategoryID) VALUES ( @productName, @price, @categoryID);",
+            new {productName = name, price = price, categoryID = categoryID });
+    }
+    public IEnumerable<Product> GetAllProducts()
+    {
+       return _conn.Query<Product>("SELECT * FROM PRODUCTS;");
+    }
+
+    public void UpdateProductName(int productID, string updatedName)
+    {
+        _conn.Execute("UPDATE products SET Name = @updatedName WHERE  ProductID = @productID;",
+            new { updatedName = updatedName, productID = productID });
     }
     
-    public Product GetProduct(int id)
-    {
-        return _conn.QuerySingle<Product>("SELECT * FROM products WHERE productID = @id;",
-            new { id });
-        }
-
-    public void UpdateProduct(Product product)
     {
         _conn.Execute("UPDATE products" +
                       "Set Name = @name," +
