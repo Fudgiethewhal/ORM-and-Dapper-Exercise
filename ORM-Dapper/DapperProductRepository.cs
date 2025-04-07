@@ -32,23 +32,14 @@ public class DapperProductRepository : IProductRepository
         _conn.Execute("UPDATE products SET Name = @updatedName WHERE  ProductID = @productID;",
             new { updatedName = updatedName, productID = productID });
     }
-    
-    {
-        _conn.Execute("UPDATE products" +
-                      "Set Name = @name," +
-                      "Price= @price," +
-                      "CategoryID = @catID," +
-                      "OnSale = @onSale," +
-                      "StockLevel = @stock" +
-                      "WHERE productID = @id;",
-            new
-            {
-                name = product.Name,
-                price = product.Price,
-                catID = product.CategoryID,
-                OnSale = product.OnSale,
-                stock = product.StockLevel
-            });
-    }
 
+    public void DeleteProduct(int productID)
+    {
+        _conn.Execute("DELETE FROM reviews WHERE ProductID =  @productID;",
+            new { productID = productID });
+        _conn.Execute("DELETE FROM sales WHERE ProductID = @productID;",
+            new { productID = productID });
+        _conn.Execute("DELETE FROM products WHERE ProductID = @productID;",
+            new { productID = productID });
+    }
 }

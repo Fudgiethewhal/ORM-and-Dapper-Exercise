@@ -10,4 +10,5 @@ namespace ORM_Dapper;
 public interface IDepartmentRepository
 {
     public IEnumerable<Department> GetAllDepartments();
+    void InsertDepartment(string newDepartmentName);
 }

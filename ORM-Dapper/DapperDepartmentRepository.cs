@@ -19,13 +19,14 @@ public class DapperDepartmentRepository : IDepartmentRepository
 
     public IEnumerable<Department> GetAllDepartments()
     {
-        return _conn.Query<Department>("SELECT * FROM departments");
+        var departments = _conn.Query<Department>("SELECT * FROM departments");
+        return departments;
 
     }
-    
-    public void InsertDepartment(string name)
-    {
-        _conn.Execute("INSERT INTO departments (Name) VALUES (@name)", new {name = name });
 
+    public void InsertDepartment(string newDepartmentName)
+    {
+        _conn.Execute("INSERT INTO DEPARTMENTS (Name) VALUES (@departmentName);",
+            new { departmentName = newDepartmentName });
     }
 }
