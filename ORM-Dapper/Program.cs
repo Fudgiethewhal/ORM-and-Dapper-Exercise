@@ -25,12 +25,16 @@ namespace ORM_Dapper
             
             var productRepository = new DapperProductRepository(conn);
 
+            var productToUpdate = productRepository.GetProduct(980);
+            productRepository.UpdateProduct(productToUpdate);
+
+            productToUpdate.Name = "Updated!!!";
+            productToUpdate.Price = 12.99;
+            productToUpdate.CategoryID = 1;
+            productToUpdate.OnSale = false;
+            productToUpdate.StockLevel = 1000;
+
             var products = productRepository.GetAllProducts();
-            
-            foreach (var product in products)
-            {
-                Console.WriteLine($"{product.ProductID} {product.Name}");
-            }
 
             foreach (var product in products)
             {
@@ -50,11 +54,11 @@ namespace ORM_Dapper
             Console.WriteLine("Please press enter...");
             Console.ReadLine();
 
-            var departmentRepo = new DapperDepartmentRepository();
-            departmentRepo.InsertDepartment(Bryseida's new Department);
-            var deparments = departmentRepo.GetAllDepartments();
+            var departmentRepo = new DapperDepartmentRepository(conn);
+            departmentRepo.InsertDepartment("Bryseida's new Department");
+            var departments = departmentRepo.GetAllDepartments();
             
-            foreach (var department in deparments)
+            foreach (var department in departments)
             {
                 Console.WriteLine(department.DepartmentID);
                 Console.WriteLine(department.Name);

@@ -27,19 +27,39 @@ public class DapperProductRepository : IProductRepository
        return _conn.Query<Product>("SELECT * FROM PRODUCTS;");
     }
 
-    public void UpdateProductName(int productID, string updatedName)
+    public Product GetProduct(int id)
     {
-        _conn.Execute("UPDATE products SET Name = @updatedName WHERE  ProductID = @productID;",
-            new { updatedName = updatedName, productID = productID });
+        return _conn.QuerySingle<Product>("SELECT * FROM products WHERE ProductID = @id;",
+            new { id = id });
     }
 
-    public void DeleteProduct(int productID)
+    public void UpdateProduct(Product product)
     {
-        _conn.Execute("DELETE FROM reviews WHERE ProductID =  @productID;",
-            new { productID = productID });
-        _conn.Execute("DELETE FROM sales WHERE ProductID = @productID;",
-            new { productID = productID });
-        _conn.Execute("DELETE FROM products WHERE ProductID = @productID;",
-            new { productID = productID });
+        _conn.Execute(
+            "UPDATE products"+
+            " SET Name = @name," +
+            " Price = @price," +
+            " CategoryID = @catID," +
+            " OnSale = @onSale," +
+            " StockLevel = @stockLevel;" +
+            " WHERE ProductID = @id;",
+            new {
+                    id = product.ProductID,
+                    name = product.Name,
+                    price = product.Price,
+                    categoryID = product.CategoryID,
+                    onSale = product.OnSale,
+                    stockLevel = product.StockLevel     
+                });
+            
+    }
+    
+
+    public void DeleteProduct(int id)
+    {
+        _conn.Execute("DELETE FROM sales WHERE ProductID =  @id;", new { id = id});
+
+        _conn.Execute("DELETE FROM reviews WHERE ProductID = @id;", new { id = id });
+        _conn.Execute("DELETE FROM products WHERE ProductID = @id;", new { id = id });
     }
 }
