@@ -41,13 +41,13 @@ public class DapperProductRepository : IProductRepository
             " Price = @price," +
             " CategoryID = @catID," +
             " OnSale = @onSale," +
-            " StockLevel = @stockLevel;" +
+            " StockLevel = @stockLevel" +
             " WHERE ProductID = @id;",
             new {
                     id = product.ProductID,
                     name = product.Name,
                     price = product.Price,
-                    categoryID = product.CategoryID,
+                    catID = product.CategoryID,
                     onSale = product.OnSale,
                     stockLevel = product.StockLevel     
                 });
